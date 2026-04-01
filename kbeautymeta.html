@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KBMETA — Seoul Skincare</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rose: #c8956c;
+    --blush: #f5e6de;
+    --deep: #2a1f1a;
+    --cream: #fdf8f5;
+    --gold: #b8936a;
+    --muted: #8a7168;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--deep); overflow-x: hidden; }
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    padding: 20px 40px;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(253,248,245,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(200,149,108,0.15);
+  }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; letter-spacing: 3px; color: var(--rose); }
+  .nav-links { display: flex; gap: 32px; }
+  .nav-links a { text-decoration: none; color: var(--muted); font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; transition: color 0.3s; }
+  .nav-links a:hover { color: var(--rose); }
+  .nav-code { background: var(--rose); color: white; padding: 8px 16px; border-radius: 20px; font-size: 12px; letter-spacing: 1px; font-weight: 500; }
+  .hero {
+    min-height: 100vh; display: flex; align-items: center;
+    padding: 120px 40px 80px; position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: -50%; right: -20%;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(200,149,108,0.12) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero::after {
+    content: 'GLOW';
+    position: absolute; right: 5%; top: 30%;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 180px; font-weight: 300;
+    color: rgba(200,149,108,0.06);
+    letter-spacing: -5px; pointer-events: none;
+  }
+  .hero-content { max-width: 620px; animation: fadeUp 1s ease both; }
+  .hero-tag { display: inline-block; background: var(--blush); color: var(--rose); padding: 6px 16px; border-radius: 20px; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 24px; }
+  .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(52px, 7vw, 82px); font-weight: 300; line-height: 1.1; margin-bottom: 24px; }
+  .hero h1 em { font-style: italic; color: var(--rose); }
+  .hero p { font-size: 16px; line-height: 1.8; color: var(--muted); margin-bottom: 40px; max-width: 480px; }
+  .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary { background: var(--deep); color: white; padding: 14px 32px; border-radius: 30px; font-size: 14px; letter-spacing: 1px; border: none; cursor: pointer; transition: all 0.3s; text-decoration: none; display: inline-block; }
+  .btn-primary:hover { background: var(--rose); transform: translateY(-2px); }
+  .btn-secondary { background: transparent; color: var(--deep); padding: 14px 32px; border-radius: 30px; font-size: 14px; letter-spacing: 1px; border: 1.5px solid var(--deep); cursor: pointer; transition: all 0.3s; text-decoration: none; display: inline-block; }
+  .btn-secondary:hover { border-color: var(--rose); color: var(--rose); }
+  .code-banner { background: var(--deep); color: white; padding: 16px 40px; display: flex; justify-content: center; align-items: center; gap: 12px; font-size: 13px; letter-spacing: 1px; }
+  .code-badge { background: var(--rose); color: white; padding: 4px 12px; border-radius: 12px; font-weight: 600; letter-spacing: 2px; font-size: 13px; }
+  section { padding: 100px 40px; }
+  .section-tag { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--rose); margin-bottom: 16px; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 5vw, 54px); font-weight: 300; line-height: 1.2; margin-bottom: 20px; }
+  .section-sub { color: var(--muted); font-size: 15px; line-height: 1.8; max-width: 520px; margin-bottom: 60px; }
+  .products { background: var(--blush); }
+  .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 28px; max-width: 1100px; margin: 0 auto; }
+  .product-card { background: white; border-radius: 20px; padding: 32px; position: relative; transition: transform 0.3s, box-shadow 0.3s; overflow: hidden; }
+  .product-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(42,31,26,0.1); }
+  .product-step { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--rose); margin-bottom: 8px; }
+  .product-emoji { font-size: 42px; margin-bottom: 16px; display: block; }
+  .product-brand { font-size: 12px; color: var(--muted); margin-bottom: 4px; letter-spacing: 1px; }
+  .product-name { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; margin-bottom: 12px; }
+  .product-desc { font-size: 13px; color: var(--muted); line-height: 1.7; margin-bottom: 20px; }
+  .product-price { font-size: 18px; font-weight: 500; color: var(--rose); margin-bottom: 20px; }
+  .product-btn { width: 100%; padding: 12px; background: var(--deep); color: white; border: none; border-radius: 12px; font-size: 13px; letter-spacing: 1px; cursor: pointer; transition: background 0.3s; }
+  .product-btn:hover { background: var(--rose); }
+  .product-badge { position: absolute; top: 20px; right: 20px; background: var(--blush); color: var(--rose); padding: 4px 10px; border-radius: 10px; font-size: 11px; font-weight: 500; }
+  .chatbot-section { background: var(--cream); }
+  .chatbot-wrapper { max-width: 680px; margin: 0 auto; background: white; border-radius: 28px; overflow: hidden; box-shadow: 0 20px 80px rgba(42,31,26,0.08); }
+  .chat-header { background: var(--deep); padding: 24px 28px; display: flex; align-items: center; gap: 14px; }
+  .chat-avatar { width: 42px; height: 42px; border-radius: 50%; background: var(--rose); display: flex; align-items: center; justify-content: center; font-size: 18px; }
+  .chat-header-text h3 { color: white; font-size: 15px; font-weight: 500; }
+  .chat-header-text p { color: rgba(255,255,255,0.5); font-size: 12px; }
+  .chat-status { width: 8px; height: 8px; background: #4ade80; border-radius: 50%; margin-left: auto; }
+  .chat-messages { padding: 28px; min-height: 320px; max-height: 400px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; }
+  .msg { max-width: 80%; animation: fadeUp 0.3s ease; }
+  .msg-bot { align-self: flex-start; background: var(--blush); border-radius: 0 16px 16px 16px; padding: 14px 18px; font-size: 14px; line-height: 1.7; color: var(--deep); }
+  .msg-user { align-self: flex-end; background: var(--deep); color: white; border-radius: 16px 16px 0 16px; padding: 14px 18px; font-size: 14px; line-height: 1.7; }
+  .quick-replies { padding: 0 28px 20px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .quick-btn { background: var(--blush); color: var(--deep); border: none; border-radius: 20px; padding: 8px 16px; font-size: 12px; cursor: pointer; transition: all 0.2s; font-family: 'DM Sans', sans-serif; }
+  .quick-btn:hover { background: var(--rose); color: white; }
+  .chat-input-area { padding: 20px 28px; border-top: 1px solid var(--blush); display: flex; gap: 12px; }
+  .chat-input { flex: 1; padding: 12px 18px; border: 1.5px solid var(--blush); border-radius: 24px; font-size: 14px; font-family: 'DM Sans', sans-serif; outline: none; transition: border-color 0.2s; color: var(--deep); }
+  .chat-input:focus { border-color: var(--rose); }
+  .chat-send { background: var(--rose); color: white; border: none; border-radius: 50%; width: 44px; height: 44px; cursor: pointer; font-size: 18px; transition: transform 0.2s; display: flex; align-items: center; justify-content: center; }
+  .chat-send:hover { transform: scale(1.1); }
+  .how { background: var(--deep); color: white; }
+  .how .section-title { color: white; }
+  .how .section-sub { color: rgba(255,255,255,0.5); }
+  .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; max-width: 900px; }
+  .step { text-align: center; }
+  .step-num { font-family: 'Cormorant Garamond', serif; font-size: 64px; font-weight: 300; color: rgba(200,149,108,0.3); line-height: 1; margin-bottom: 12px; }
+  .step h4 { font-size: 15px; font-weight: 500; margin-bottom: 10px; color: var(--blush); }
+  .step p { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.7; }
+  footer { background: var(--deep); color: white; padding: 48px 40px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; border-top: 1px solid rgba(255,255,255,0.06); }
+  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 24px; color: var(--rose); letter-spacing: 3px; }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a { color: rgba(255,255,255,0.4); text-decoration: none; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--rose); }
+  footer p { color: rgba(255,255,255,0.25); font-size: 12px; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .typing span { display: inline-block; width: 6px; height: 6px; background: var(--rose); border-radius: 50%; margin: 0 2px; animation: bounce 1.2s infinite; }
+  .typing span:nth-child(2) { animation-delay: 0.2s; }
+  .typing span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes bounce { 0%, 60%, 100% { transform: translateY(0); } 30% { transform: translateY(-8px); } }
+  @media (max-width: 768px) { nav { padding: 16px 20px; } .nav-links { display: none; } .hero { padding: 100px 20px 60px; } section { padding: 60px 20px; } footer { padding: 32px 20px; flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">KBMETA</div>
+  <div class="nav-links">
+    <a href="#products">Shop</a>
+    <a href="#advisor">AI Advisor</a>
+    <a href="#how">How It Works</a>
+    <a href="https://instagram.com/kbeautymeta" target="_blank">Instagram</a>
+  </div>
+  <div class="nav-code">Code: KBMETA01</div>
+</nav>
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-tag">✨ AI-Curated Seoul Skincare</div>
+    <h1>Your skin,<br><em>finally</em><br>understood.</h1>
+    <p>Korean beauty secrets, curated by AI. Zero guesswork, zero inventory — just the perfect routine for your skin, delivered straight to your door.</p>
+    <div class="hero-btns">
+      <a href="#advisor" class="btn-primary">Get My Routine →</a>
+      <a href="#products" class="btn-secondary">Shop Picks</a>
+    </div>
+  </div>
+</section>
+
+<div class="code-banner">
+  <span>✨ Use code</span>
+  <span class="code-badge">KBMETA01</span>
+  <span>on YesStyle for exclusive savings</span>
+</div>
+
+<section class="products" id="products">
+  <div class="section-tag">✦ Curated Picks</div>
+  <h2 class="section-title">The Chok-Chok<br>Glazed Skin Routine</h2>
+  <p class="section-sub">That bouncy, honey-glazed glow Korean women have been perfecting for decades. Our AI selected the perfect 3-step starter kit.</p>
+  <div class="product-grid">
+    <div class="product-card">
+      <div class="product-badge">Step 1</div>
+      <span class="product-emoji">🌿</span>
+      <div class="product-step">Cleanse</div>
+      <div class="product-brand">COSRX</div>
+      <div class="product-name">Low pH Good Morning Gel Cleanser</div>
+      <p class="product-desc">pH-balanced formula that removes impurities without stripping your barrier. The foundation of every Korean skincare routine.</p>
+      <div class="product-price">~$14</div>
+      <button class="product-btn" onclick="window.open('https://www.yesstyle.com','_blank')">Shop on YesStyle →</button>
+    </div>
+    <div class="product-card">
+      <div class="product-badge">Step 2</div>
+      <span class="product-emoji">🐌</span>
+      <div class="product-step">Hydrate</div>
+      <div class="product-brand">COSRX</div>
+      <div class="product-name">Advanced Snail 96 Mucin Power Essence</div>
+      <p class="product-desc">96% snail mucin delivers that iconic bouncy, dewy glow that TikTok is obsessing over. The holy grail of glass skin.</p>
+      <div class="product-price">~$25</div>
+      <button class="product-btn" onclick="window.open('https://www.yesstyle.com','_blank')">Shop on YesStyle →</button>
+    </div>
+    <div class="product-card">
+      <div class="product-badge">Step 3</div>
+      <span class="product-emoji">🍚</span>
+      <div class="product-step">Glow</div>
+      <div class="product-brand">I'm From</div>
+      <div class="product-name">Rice Toner</div>
+      <p class="product-desc">77% rice extract for that lit-from-within luminosity. Niacinamide brightens while locking in all that hydration.</p>
+      <div class="product-price">~$38</div>
+      <button class="product-btn" onclick="window.open('https://www.yesstyle.com','_blank')">Shop on YesStyle →</button>
+    </div>
+  </div>
+</section>
+
+<section class="chatbot-section" id="advisor">
+  <div style="text-align:center; margin-bottom: 60px;">
+    <div class="section-tag">✦ AI Beauty Advisor</div>
+    <h2 class="section-title">Your Personal<br>K-Beauty Guide</h2>
+    <p class="section-sub" style="margin: 0 auto;">Tell us about your skin and we'll build the perfect Korean skincare routine — instantly, for free.</p>
+  </div>
+  <div class="chatbot-wrapper">
+    <div class="chat-header">
+      <div class="chat-avatar">✨</div>
+      <div class="chat-header-text">
+        <h3>KBMETA Advisor</h3>
+        <p>AI-powered K-Beauty curation</p>
+      </div>
+      <div class="chat-status"></div>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+      <div class="msg msg-bot">Hey there! 👋 I'm your personal K-Beauty advisor.<br><br>Tell me about your skin and I'll build the perfect Korean skincare routine for you. What's your biggest skin concern right now?</div>
+    </div>
+    <div class="quick-replies" id="quickReplies">
+      <button class="quick-btn" onclick="sendQuick('My skin is very dry and flaky')">🧊 Dry & flaky</button>
+      <button class="quick-btn" onclick="sendQuick('I have oily/combination skin')">💧 Oily skin</button>
+      <button class="quick-btn" onclick="sendQuick('I want glass skin glow')">✨ Glass skin glow</button>
+      <button class="quick-btn" onclick="sendQuick('My skin is sensitive and red')">🌸 Sensitive skin</button>
+      <button class="quick-btn" onclick="sendQuick('I want anti-aging routine')">⏰ Anti-aging</button>
+    </div>
+    <div class="chat-input-area">
+      <input class="chat-input" id="chatInput" type="text" placeholder="Ask me anything about K-Beauty..." onkeypress="if(event.key==='Enter')sendMessage()">
+      <button class="chat-send" onclick="sendMessage()">→</button>
+    </div>
+  </div>
+</section>
+
+<section class="how" id="how">
+  <div class="section-tag" style="color: var(--rose);">✦ How It Works</div>
+  <h2 class="section-title">Zero inventory.<br>Maximum glow.</h2>
+  <p class="section-sub">KBMETA is powered entirely by AI agents — we curate, you glow.</p>
+  <div class="steps-grid">
+    <div class="step">
+      <div class="step-num">01</div>
+      <h4>Tell Us Your Skin</h4>
+      <p>Answer a few quick questions about your skin type and concerns.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <h4>AI Curates Your Routine</h4>
+      <p>Our AI agents analyze thousands of K-Beauty products to find your perfect match.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <h4>Shop with Code</h4>
+      <p>Use code KBMETA01 on YesStyle for exclusive savings on your curated picks.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <h4>Glow Up</h4>
+      <p>Your Korean skincare arrives at your door. Start your glass skin journey.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">KBMETA</div>
+  <div class="footer-links">
+    <a href="https://instagram.com/kbeautymeta" target="_blank">Instagram</a>
+    <a href="https://www.youtube.com/@NovaVistaMetaTravel" target="_blank">YouTube</a>
+    <a href="https://www.yesstyle.com" target="_blank">Shop YesStyle</a>
+  </div>
+  <p>© 2026 KBMETA · Seoul Skincare · Code: KBMETA01</p>
+</footer>
+
+<script>
+const responses = {
+  dry: { text: "Perfect — dry skin loves hydration layering! 🌊 Here's your routine:\n\n🌿 Step 1: COSRX Low pH Cleanser (~$14)\n🐌 Step 2: Snail 96 Mucin Essence (~$25) — this will change your life\n🍚 Step 3: I'm From Rice Toner (~$38)\n\nUse code KBMETA01 on YesStyle for savings! ✨", quick: ['Show me more products', 'What is glass skin?', 'How do I apply these?'] },
+  oily: { text: "Oily skin + K-Beauty = perfect match! 🍃 Korean skincare balances oil WITHOUT stripping:\n\n🌿 Step 1: COSRX Low pH Cleanser (~$14)\n🐌 Step 2: Snail Mucin Essence (~$25)\n💚 Step 3: SOME BY MI AHA BHA Toner (~$22)\n\nCode KBMETA01 on YesStyle! ✨", quick: ['Tell me more', 'Lightweight moisturizer?', 'Best Korean SPF?'] },
+  glass: { text: "Glass skin is ALL about layers! ✨ The secret:\n\n🌿 Cleanse → 🐌 Essence → 🍚 Toner → seal with cream\n\nOur starter kit:\n1. COSRX Cleanser $14\n2. Snail 96 Mucin $25 — THE dewy glow product\n3. I'm From Rice Toner $38\n\nAll on YesStyle with code KBMETA01! 🌸", quick: ['What makes glass skin?', 'Best Korean moisturizer?', 'Shop the full kit'] },
+  sensitive: { text: "Sensitive skin needs gentle K-Beauty love! 🌸 Korean brands are amazing for sensitivity:\n\n🌿 COSRX Low pH Cleanser $14\n🌱 Dr.Jart+ Cicapair Tiger Grass Cream $48\n💦 Klairs Supple Preparation Toner $22\n\nCode KBMETA01 on YesStyle! ✨", quick: ['What is centella?', 'Best for redness?', 'Fragrance-free options?'] },
+  aging: { text: "K-Beauty anti-aging is next level! ⏰ Korean women age beautifully because they start early:\n\n🌿 COSRX Cleanser $14\n⭐ Missha Time Revolution Ampoule $35\n🍚 I'm From Rice Toner $38\n\nAll on YesStyle — use code KBMETA01! ✨", quick: ['What ingredients fight aging?', 'Korean eye cream?', 'Shop anti-aging kit'] },
+  default: { text: "Great question! K-Beauty is all about treating your skin with care 🌸\n\nOur AI-curated starter kit:\n\n🌿 COSRX Cleanser $14\n🐌 Snail Mucin Essence $25\n🍚 I'm From Rice Toner $38\n\nShop on YesStyle with code KBMETA01! ✨\n\nTell me your skin type for a personalized routine!", quick: ['Dry skin', 'Oily skin', 'Sensitive skin', 'Anti-aging'] }
+};
+function getResponse(msg) {
+  const m = msg.toLowerCase();
+  if (m.includes('dry') || m.includes('flak')) return responses.dry;
+  if (m.includes('oily') || m.includes('combination')) return responses.oily;
+  if (m.includes('glass') || m.includes('glow') || m.includes('dewy')) return responses.glass;
+  if (m.includes('sensitive') || m.includes('red')) return responses.sensitive;
+  if (m.includes('aging') || m.includes('wrinkle') || m.includes('anti')) return responses.aging;
+  return responses.default;
+}
+function addMessage(text, isUser) {
+  const msgs = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = `msg ${isUser ? 'msg-user' : 'msg-bot'}`;
+  div.style.whiteSpace = 'pre-line';
+  div.textContent = text;
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+function showTyping() {
+  const msgs = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = 'msg msg-bot typing';
+  div.id = 'typingIndicator';
+  div.innerHTML = '<span></span><span></span><span></span>';
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+function updateQuickReplies(buttons) {
+  const qr = document.getElementById('quickReplies');
+  qr.innerHTML = '';
+  buttons.forEach(b => {
+    const btn = document.createElement('button');
+    btn.className = 'quick-btn';
+    btn.textContent = b;
+    btn.onclick = () => sendQuick(b);
+    qr.appendChild(btn);
+  });
+}
+function sendQuick(text) {
+  addMessage(text, true);
+  document.getElementById('quickReplies').innerHTML = '';
+  showTyping();
+  setTimeout(() => {
+    document.getElementById('typingIndicator')?.remove();
+    const res = getResponse(text);
+    addMessage(res.text, false);
+    updateQuickReplies(res.quick || []);
+  }, 1200);
+}
+function sendMessage() {
+  const input = document.getElementById('chatInput');
+  const text = input.value.trim();
+  if (!text) return;
+  input.value = '';
+  sendQuick(text);
+}
+</script>
+</body>
+</html>
